@@ -1,3 +1,4 @@
+using System;
 using Game.Presenters.Planets;
 using Game.Views.Planets;
 using Modules.Planets;
@@ -14,14 +15,13 @@ namespace Game.Presenters
     {
         public override void InstallBindings()
         {
-            Container.BindFactory<Planet, PlanetView, PlanetPresenter, PlanetPresenter.Factory>()
-                .AsSingle();
-            Container.Bind<PlanetPresenter[]>().FromMethod(CreatePlanetPresenters).AsSingle().NonLazy();
+            Container.BindFactory<Planet, PlanetView, PlanetPresenter, PlanetPresenterFactory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlanetPresenter>().FromMethodMultiple(CreatePlanetPresenters).AsTransient();
         }
 
         private PlanetPresenter[] CreatePlanetPresenters(InjectContext context)
         {
-            var factory = context.Container.Resolve<PlanetPresenter.Factory>();
+            var factory = context.Container.Resolve<PlanetPresenterFactory>();
             var planets = context.Container.Resolve<Planet[]>();
             var views = context.Container.Resolve<PlanetView[]>();
             var presenters = new PlanetPresenter[views.Length];
@@ -32,6 +32,10 @@ namespace Game.Presenters
             }
 
             return presenters;
+        }
+
+        private class PlanetPresenterFactory : PlaceholderFactory<Planet, PlanetView, PlanetPresenter>
+        {
         }
     }
 }

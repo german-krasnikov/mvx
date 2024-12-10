@@ -1,11 +1,19 @@
+using System;
+using Modules.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Game.Views.Planets
 {
     public class PlanetView : MonoBehaviour
     {
-        [SerializeField] 
+        public event Action OnClick;
+
+        [SerializeField]
+        private Image _icon;
+        [SerializeField]
         private GameObject _lock;
         [SerializeField]
         private GameObject _coin;
@@ -15,17 +23,21 @@ namespace Game.Views.Planets
         private TMP_Text _priceText;
         [SerializeField]
         private PlanetProgressBarView _progress;
+        [SerializeField]
+        private SmartButton _button;
 
-        public void SetLock(bool isLocked)
-        {
-            _lock.SetActive(false);
-        }
+        private void OnEnable() => _button.OnClick += ClickHandler;
 
-        public void SetPrice(string price)
-        {
-            _priceText.text = price;
-        }
-        
+        private void OnDisable() => _button.OnClick -= ClickHandler;
+
+        private void ClickHandler() => OnClick?.Invoke();
+
+        public void SetIcon(Sprite icon) => _icon.sprite = icon;
+
+        public void SetLock(bool isLocked) => _lock.SetActive(isLocked);
+
+        public void SetPrice(string price) => _priceText.text = price;
+
         public void SetProgress(string time, float progress) => _progress.SetProgress(time, progress);
     }
 }
