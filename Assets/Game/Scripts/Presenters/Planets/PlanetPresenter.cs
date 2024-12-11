@@ -14,14 +14,14 @@ namespace Game.Presenters.Planets
         {
             _model = model;
             _view = view;
-            Invalidate();
         }
 
-        public void Initialize()
+        void IInitializable.Initialize()
         {
             _view.OnClick += ClickHandler;
             _model.OnIncomeReady += IncomeReadyHandler;
             _model.OnIncomeTimeChanged += IncomeTimeChangedHandler;
+            Invalidate();
         }
 
         void IDisposable.Dispose()
@@ -53,11 +53,12 @@ namespace Game.Presenters.Planets
 
         private void IncomeReadyHandler(bool value)
         {
+            
         }
 
         private void IncomeTimeChangedHandler(float time)
         {
-            _view.SetProgress(time.ToString("00:00"), time);
+            _view.SetProgress(time.ToString("00:00"), _model.IncomeProgress);
         }
     }
 }
