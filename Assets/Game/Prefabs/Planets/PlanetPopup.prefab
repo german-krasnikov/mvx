@@ -283,6 +283,8 @@ MonoBehaviour:
   _level: {fileID: 5472911088123096804}
   _income: {fileID: 159619003737596086}
   _closeButton: {fileID: 4860622370961867766}
+  _upgradeButton: {fileID: 3885529525276896717}
+  _upgradePrice: {fileID: 2019871224800427396}
 --- !u!1 &965717003820527526
 GameObject:
   m_ObjectHideFlags: 0
