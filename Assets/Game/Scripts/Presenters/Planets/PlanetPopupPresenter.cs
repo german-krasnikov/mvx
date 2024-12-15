@@ -2,12 +2,11 @@ using System;
 using Game.Views.Planets;
 using Modules.Money;
 using Modules.Planets;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Presenters.Planets
 {
-    public class PlanetPopupPresenter : IInitializable, IDisposable
+    public class PlanetPopupPresenter
     {
         public class Factory : PlaceholderFactory<PlanetPopupView, PlanetPopupPresenter>
         {
@@ -26,33 +25,37 @@ namespace Game.Presenters.Planets
         public void Show(Planet model)
         {
             _model = model;
-            _model.OnUpgraded += UpgradedHandler;
+            Subscribe();
             Invalidate();
             _view.SetVisible(true);
         }
 
-        void IInitializable.Initialize()
+        private void Subscribe()
         {
             _view.OnClose += CloseHandler;
+            _view.OnUpgrade += UpgradeHandler;
             _moneyStorage.OnMoneyChanged += MoneyChangedHandler;
         }
 
-        void IDisposable.Dispose()
+        private void Unsubscribe()
         {
             _view.OnClose -= CloseHandler;
+            _view.OnUpgrade -= UpgradeHandler;
             _moneyStorage.OnMoneyChanged -= MoneyChangedHandler;
-            if (_model == null) return;
-            _model.OnUpgraded -= UpgradedHandler;
         }
 
-        private void UpgradedHandler(int value)
+        private void CloseHandler()
+        {
+            _view.SetVisible(false);
+            Unsubscribe();
+        }
+
+        private void UpgradeHandler()
         {
             if (!_model.CanUpgrade) return;
             _model.Upgrade();
             Invalidate();
         }
-
-        private void CloseHandler() => _view.SetVisible(false);
 
         private void Invalidate()
         {
@@ -61,6 +64,7 @@ namespace Game.Presenters.Planets
             _view.SetPopulation($"Population: {_model.Population}");
             _view.SetIncome($"Income: {_model.MinuteIncome}/sec");
             _view.SetLevel($"Level: {_model.Level}/{_model.MaxLevel}");
+            _view.SetUpgradeVisible(!_model.IsMaxLevel);
             _view.SetUpgradeEnabled(_model.CanUpgrade);
             _view.SetUpgradePrice(_model.Price.ToString());
         }

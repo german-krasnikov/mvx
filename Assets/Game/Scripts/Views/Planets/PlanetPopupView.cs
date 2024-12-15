@@ -35,6 +35,7 @@ namespace Game.Views.Planets
         public void SetPopulation(string population) => _population.text = population;
         public void SetLevel(string level) => _level.text = level;
         public void SetIncome(string income) => _income.text = income;
+        public void SetUpgradeVisible(bool isVisible) => _upgradeButton.gameObject.SetActive(isVisible);
 
         public void SetUpgradeEnabled(bool value) => _upgradeButton.interactable = value;
         public void SetUpgradePrice(string price) => _upgradePrice.text = price;
