@@ -20,6 +20,8 @@ namespace Game.Presenters
             Container.BindInterfacesAndSelfTo<PlanetPresenter>().FromMethodMultiple(CreatePlanetPresenters).AsTransient();
             Container.BindFactory<MoneyView, MoneyPresenter, MoneyPresenter.Factory>().AsSingle();
             Container.BindInterfacesAndSelfTo<MoneyPresenter>().FromMethod(CreateMoneyPresenter).AsSingle();
+            Container.BindFactory<PlanetPopupView, PlanetPopupPresenter, PlanetPopupPresenter.Factory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlanetPopupPresenter>().FromMethod(CreatePlanetPopupPresenter).AsTransient();
         }
 
         private PlanetPresenter[] CreatePlanetPresenters(InjectContext context)
@@ -36,12 +38,20 @@ namespace Game.Presenters
 
             return presenters;
         }
-        
+
         private MoneyPresenter CreateMoneyPresenter(InjectContext context)
         {
             var factory = context.Container.Resolve<MoneyPresenter.Factory>();
             var view = context.Container.Resolve<MoneyView>();
-            var presenter = factory.Create( view);
+            var presenter = factory.Create(view);
+            return presenter;
+        }
+
+        private PlanetPopupPresenter CreatePlanetPopupPresenter(InjectContext context)
+        {
+            var factory = context.Container.Resolve<PlanetPopupPresenter.Factory>();
+            var view = context.Container.Resolve<PlanetPopupView>();
+            var presenter = factory.Create(view);
             return presenter;
         }
     }

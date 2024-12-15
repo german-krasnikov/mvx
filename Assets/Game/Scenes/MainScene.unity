@@ -1361,6 +1361,7 @@ MonoBehaviour:
   - {fileID: 1648986722}
   - {fileID: 592538900}
   _moneyView: {fileID: 6121086404576301248}
+  _planetPopupView: {fileID: 1802329538}
 --- !u!114 &873220076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1904,6 +1905,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5364966909751367753, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
   m_PrefabInstance: {fileID: 1052078977217180737}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1802329538 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 694930046772950455, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
+  m_PrefabInstance: {fileID: 1052078977217180737}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61340da461b44fcab673e702c227984e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1886819928
 GameObject:
   m_ObjectHideFlags: 0

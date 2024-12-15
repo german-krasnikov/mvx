@@ -10,11 +10,14 @@ namespace Game.Views
         private PlanetView[] _planetViews;
         [SerializeField]
         private MoneyView _moneyView;
+        [SerializeField]
+        private PlanetPopupView _planetPopupView;
 
         public override void InstallBindings()
         {
             Container.Bind<PlanetView[]>().FromInstance(_planetViews).AsSingle().NonLazy();
             Container.Bind<MoneyView>().FromInstance(_moneyView).AsSingle().NonLazy();
+            Container.Bind<PlanetPopupView>().FromInstance(_planetPopupView).AsSingle().NonLazy();
         }
     }
 }

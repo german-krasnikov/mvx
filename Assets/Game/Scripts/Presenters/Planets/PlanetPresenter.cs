@@ -1,24 +1,28 @@
 using System;
 using Game.Views.Planets;
 using Modules.Planets;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Presenters.Planets
 {
     public class PlanetPresenter : IInitializable, IDisposable
     {
-        private PlanetView _view;
-        private Planet _model;
+        private readonly PlanetView _view;
+        private readonly Planet _model;
+        private readonly PlanetPopupPresenter _planetPopupPresenter;
 
-        public PlanetPresenter(Planet model, PlanetView view)
+        public PlanetPresenter(Planet model, PlanetView view, PlanetPopupPresenter planetPopupPresenter)
         {
             _model = model;
             _view = view;
+            _planetPopupPresenter = planetPopupPresenter;
         }
 
         void IInitializable.Initialize()
         {
             _view.OnClick += ClickHandler;
+            _view.OnHold += HoldHandler;
             _model.OnIncomeReady += IncomeReadyHandler;
             _model.OnIncomeTimeChanged += IncomeTimeChangedHandler;
             Invalidate();
@@ -27,6 +31,7 @@ namespace Game.Presenters.Planets
         void IDisposable.Dispose()
         {
             _view.OnClick -= ClickHandler;
+            _view.OnHold -= HoldHandler;
             _model.OnIncomeReady -= IncomeReadyHandler;
             _model.OnIncomeTimeChanged -= IncomeTimeChangedHandler;
         }
@@ -55,6 +60,14 @@ namespace Game.Presenters.Planets
             }
         }
 
+        private void HoldHandler()
+        {
+            if (_model.IsUnlocked)
+            {
+                _planetPopupPresenter.Show(_model);
+            }
+        }
+
         private void IncomeReadyHandler(bool value)
         {
             _view.SetProgressVisible(!value);
@@ -65,7 +78,7 @@ namespace Game.Presenters.Planets
         {
             _view.SetProgress(time.ToString("00:00"), _model.IncomeProgress);
         }
-        
+
         public class Factory : PlaceholderFactory<Planet, PlanetView, PlanetPresenter>
         {
         }
