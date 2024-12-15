@@ -34,10 +34,20 @@ namespace Game.Views.Planets
 
         public void SetIcon(Sprite icon) => _icon.sprite = icon;
 
-        public void SetLock(bool isLocked) => _lock.SetActive(isLocked);
+        public void SetLock(bool isLocked)
+        {
+            _lock.SetActive(isLocked);
+            SetCoinVisible(!isLocked);
+            SetPriceVisible(!isLocked);
+        }
+        
+        public void SetCoinVisible(bool isVisible) => _coin.SetActive(isVisible);
+        
+        public void SetPriceVisible(bool isVisible) => _priceContainer.SetActive(isVisible);
 
         public void SetPrice(string price) => _priceText.text = price;
 
         public void SetProgress(string time, float progress) => _progress.SetProgress(time, progress);
+        public void SetProgressVisible(bool isVisible) => _progress.gameObject.SetActive(isVisible);
     }
 }

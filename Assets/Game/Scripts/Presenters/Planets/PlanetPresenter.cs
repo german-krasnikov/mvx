@@ -34,7 +34,7 @@ namespace Game.Presenters.Planets
             _view.SetIcon(_model.GetIcon(_model.IsUnlocked));
             _view.SetLock(!_model.IsUnlocked);
             _view.SetPrice(_model.Price.ToString());
-            //view.SetProgress(planet.planet.IncomeProgress);
+            _view.SetCoinVisible(false);
         }
 
         private void ClickHandler()
@@ -53,7 +53,8 @@ namespace Game.Presenters.Planets
 
         private void IncomeReadyHandler(bool value)
         {
-            
+            _view.SetProgressVisible(!value);
+            _view.SetCoinVisible(value);
         }
 
         private void IncomeTimeChangedHandler(float time)
