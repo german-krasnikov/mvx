@@ -27,6 +27,8 @@ namespace Game.Presenters.Planets
         void IDisposable.Dispose()
         {
             _view.OnClick -= ClickHandler;
+            _model.OnIncomeReady -= IncomeReadyHandler;
+            _model.OnIncomeTimeChanged -= IncomeTimeChangedHandler;
         }
 
         private void Invalidate()
@@ -35,6 +37,8 @@ namespace Game.Presenters.Planets
             _view.SetLock(!_model.IsUnlocked);
             _view.SetPrice(_model.Price.ToString());
             _view.SetCoinVisible(false);
+            _view.SetPriceVisible(!_model.IsUnlocked);
+            _view.SetProgressVisible(_model.IsUnlocked);
         }
 
         private void ClickHandler()
@@ -60,6 +64,10 @@ namespace Game.Presenters.Planets
         private void IncomeTimeChangedHandler(float time)
         {
             _view.SetProgress(time.ToString("00:00"), _model.IncomeProgress);
+        }
+        
+        public class Factory : PlaceholderFactory<Planet, PlanetView, PlanetPresenter>
+        {
         }
     }
 }

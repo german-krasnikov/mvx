@@ -1360,6 +1360,7 @@ MonoBehaviour:
   - {fileID: 1712307881}
   - {fileID: 1648986722}
   - {fileID: 592538900}
+  _moneyView: {fileID: 6121086404576301248}
 --- !u!114 &873220076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2426,6 +2427,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+--- !u!114 &6121086404576301248 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 108532613923940816, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+  m_PrefabInstance: {fileID: 6121086404576301247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7228f901df7348dd981e8dacee992a4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7237256081421283246 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
