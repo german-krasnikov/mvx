@@ -46,6 +46,9 @@ namespace Game.Presenters.Planets
         {
             _view.SetIcon(_model.GetIcon(_model.IsUnlocked));
             _view.SetTitle(_model.Name);
+            _view.SetPopulation($"Population: {_model.Population}");
+            _view.SetIncome($"Income: {_model.MinuteIncome}/sec");
+            _view.SetLevel($"Level: {_model.Level}/{_model.MaxLevel}");
         }
     }
 }
