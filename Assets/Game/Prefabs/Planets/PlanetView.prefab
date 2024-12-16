@@ -502,6 +502,7 @@ MonoBehaviour:
   _priceText: {fileID: 5444377921757551026}
   _progress: {fileID: 5129379192748360132}
   _button: {fileID: 5583372068559771244}
+  _coinVfxSpawnPoint: {fileID: 4069365071620109237}
 --- !u!1 &5564512366540979095
 GameObject:
   m_ObjectHideFlags: 0

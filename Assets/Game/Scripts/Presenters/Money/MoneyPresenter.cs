@@ -3,6 +3,7 @@ using Game.Gameplay;
 using Game.Presenters.Planets;
 using Game.Views.Planets;
 using Modules.Money;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Presenters.Money
@@ -32,6 +33,8 @@ namespace Game.Presenters.Money
         {
             _moneyStorage.OnMoneyChanged -= MoneyChangedHandler;
         }
+
+        public Vector2 GetCoinVfxTargetPoint() => _view.GetCoinVfxTargetPoint();
 
         private void MoneyChangedHandler(int newValue, int range)
         {

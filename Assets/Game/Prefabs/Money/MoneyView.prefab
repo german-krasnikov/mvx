@@ -299,4 +299,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7228f901df7348dd981e8dacee992a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinVfxTargetPoint: {fileID: 6204055655084186918}
   _money: {fileID: 3299675748291971791}

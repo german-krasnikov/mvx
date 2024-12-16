@@ -25,6 +25,8 @@ namespace Game.Views.Planets
         private PlanetProgressBarView _progress;
         [SerializeField]
         private SmartButton _button;
+        [SerializeField]
+        private Transform _coinVfxSpawnPoint;
 
         public void SetIcon(Sprite icon) => _icon.sprite = icon;
 
@@ -44,6 +46,11 @@ namespace Game.Views.Planets
         public void SetProgress(string time, float progress) => _progress.SetProgress(time, progress);
         public void SetProgressVisible(bool isVisible) => _progress.gameObject.SetActive(isVisible);
 
+        public Vector2 GetCoinVfxSpawnPoint()
+        {
+            return _coinVfxSpawnPoint.position;
+        }
+
         private void OnEnable()
         {
             _button.OnClick += ClickHandler;
@@ -57,6 +64,7 @@ namespace Game.Views.Planets
         }
 
         private void ClickHandler() => OnClick?.Invoke();
+
         private void HoldHandler() => OnHold?.Invoke();
     }
 }

@@ -22,6 +22,7 @@ namespace Game.Presenters
             Container.BindInterfacesAndSelfTo<MoneyPresenter>().FromMethod(CreateMoneyPresenter).AsSingle();
             Container.BindFactory<PlanetPopupView, PlanetPopupPresenter, PlanetPopupPresenter.Factory>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlanetPopupPresenter>().FromMethod(CreatePlanetPopupPresenter).AsTransient();
+            Container.BindInterfacesAndSelfTo<CoinVfxManager>().AsSingle();
         }
 
         private PlanetPresenter[] CreatePlanetPresenters(InjectContext context)

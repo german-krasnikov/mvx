@@ -8,6 +8,12 @@ namespace Game.Presenters.Planets
 {
     public class PlanetPresenter : IInitializable, IDisposable
     {
+        public class Factory : PlaceholderFactory<Planet, PlanetView, PlanetPresenter>
+        {
+        }
+
+        public static event Action<PlanetPresenter> OnGathered;
+
         private readonly PlanetView _view;
         private readonly Planet _model;
         private readonly PlanetPopupPresenter _planetPopupPresenter;
@@ -35,6 +41,8 @@ namespace Game.Presenters.Planets
             _model.OnIncomeReady -= IncomeReadyHandler;
             _model.OnIncomeTimeChanged -= IncomeTimeChangedHandler;
         }
+        
+        public Vector2 GetCoinVfxSpawnPoint() => _view.GetCoinVfxSpawnPoint();
 
         private void Invalidate()
         {
@@ -57,6 +65,7 @@ namespace Game.Presenters.Planets
             if (_model.IsUnlocked && _model.IsIncomeReady)
             {
                 _model.GatherIncome();
+                OnGathered?.Invoke(this);
             }
         }
 
@@ -78,9 +87,7 @@ namespace Game.Presenters.Planets
         {
             _view.SetProgress(time.ToString("00:00"), _model.IncomeProgress);
         }
-
-        public class Factory : PlaceholderFactory<Planet, PlanetView, PlanetPresenter>
-        {
-        }
+        
+       
     }
 }
